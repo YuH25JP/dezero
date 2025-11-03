@@ -18,6 +18,9 @@ build-backend = "uv_build"
 [tool.basedpyright]
 typeCheckingMode = "standard"
 reportAny = "none"
+# To avoid overriding error for Function.forward(), turn the following features false.
+reportIncompatibleMethodOverride = false
+reportIncompatibleVariableOverride = false
 
 [tool.ruff]
 target-version = "py314"
