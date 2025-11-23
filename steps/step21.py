@@ -84,7 +84,7 @@ class Variable:
         return mul(self, other)
 
     def __rmul__(self, other):
-        return add(self, other)
+        return mul(self, other)
 
     def __len__(self):
         return len(self.data)

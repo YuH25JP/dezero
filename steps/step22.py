@@ -93,7 +93,7 @@ class Variable:
         return mul(self, other)
 
     def __rmul__(self, other):
-        return add(self, other)
+        return mul(self, other)
 
     def __truediv__(self, other):
         return div(self, other)
