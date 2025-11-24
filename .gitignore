@@ -11,3 +11,6 @@ wheels/
 
 # pytest
 .coverage
+
+# Graph pictures
+graph
