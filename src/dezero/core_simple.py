@@ -70,7 +70,7 @@ class Variable:
 
         self.data = data
         self.name = name
-        self.grad: npt.ArrayLike | None = None
+        self.grad = None
         self.creator: Function | None = None
         self.generation = 0
 
