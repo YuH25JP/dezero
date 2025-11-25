@@ -124,7 +124,8 @@ class Variable:
         retain_grad: bool
             Whether to retain the gradadient.
         create_graph: bool
-            Whether to create backward calculation graph. When you need to calculate the second or higher derivative, set this to True.
+            Whether to create backward calculation graph.
+            When you need to calculate the second or higher derivative, set this to True.
         """
         if self.grad is None:
             # Use Variable as grad instead of nodarray
