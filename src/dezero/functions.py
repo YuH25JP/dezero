@@ -1,6 +1,6 @@
 import numpy as np
 
-from .core import Function
+from .core import Function, as_variable
 
 
 class Sin(Function):
@@ -46,3 +46,38 @@ class Tanh(Function):
 
 def tanh(x):
     return Tanh()(x)
+
+
+class Reshape(Function):
+    def __init__(self, shape):
+        self.shape = shape
+
+    # TODO: Add type annotation for x to clarify that the `x.reshape()` function below is the one defined on ndarray.
+    def forward(self, x):
+        self.x_shape = x.shape
+        y = x.reshape(self.shape)
+        return y
+
+    def backward(self, gy):
+        return reshape(gy, self.x_shape)
+
+
+def reshape(x, shape):
+    if x.shape == shape:
+        return as_variable(x)
+    return Reshape(shape)(x)
+
+
+class Transpose(Function):
+    # TODO: Add type annotation for x to clarify that the `x.transpose()` function below is the one defined on ndarray.
+    def forward(self, x):
+        y = x.transpose()
+        return y
+
+    def backward(self, gy):
+        gx = transpose(gy)
+        return gx
+
+
+def transpose(x):
+    return Transpose()(x)

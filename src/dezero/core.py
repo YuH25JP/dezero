@@ -5,6 +5,8 @@ import weakref
 
 import numpy as np
 
+import dezero
+
 
 class Config:
     enable_backdrop = True
@@ -189,6 +191,18 @@ class Variable:
     def dtype(self):
         return self.data.dtype
 
+    def reshape(self, *shape):
+        if len(shape) == 1 and isinstance(shape[0], (tuple, list)):
+            shape = shape[0]
+        return dezero.functions.reshape(self, shape)
+
+    def transpose(self):
+        return dezero.functions.transpose(self)
+
+    @property
+    def T(self):
+        return dezero.functions.transpose(self)
+
     def cleargrad(self):
         self.grad = None
 
@@ -199,6 +213,10 @@ class Function:
         inputs = [as_variable(x) for x in inputs]
 
         xs = [x.data for x in inputs]
+        # Notes: As you can see in the line below, the input args to
+        # every `forward()` method in a Function subclass is ndarrays, not `Variable`s.
+        # Therefore, we can use any operators and functions defined on ndarray
+        # when we implement our own operators or functions by defining `forward()` methods.
         ys = self.forward(*xs)
         if not isinstance(ys, tuple):
             ys = (ys,)

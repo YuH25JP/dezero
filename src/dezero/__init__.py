@@ -10,6 +10,7 @@ if is_simple_core:
         using_config,
     )
 else:
+    from dezero import functions
     from dezero.core import (
         Function,
         Variable,
@@ -26,4 +27,5 @@ __all__ = [
     "as_variable",
     "no_grad",
     "using_config",
+    "functions",
 ]
